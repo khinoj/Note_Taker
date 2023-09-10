@@ -2,10 +2,12 @@ const notes = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
 const { readAndAppend, readFromFile } = require('../helpers/fsUtils');
 
+//get data from db.json
 notes.get('/', (req, res) =>
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)))
 );
 
+//post new note to db.json
 notes.post('/', (req, res) => {
 
     const { title, text } = req.body;
@@ -14,7 +16,7 @@ notes.post('/', (req, res) => {
         const noteDB = {
             title: title,
             text: text,
-            note_id: uuidv4(),
+            id: uuidv4(),
         };
 
         readAndAppend(noteDB, './db/db.json');
@@ -28,5 +30,8 @@ notes.post('/', (req, res) => {
         res.json('Error in posting');
     }
 });
+
+
+
 
 module.exports = notes;
