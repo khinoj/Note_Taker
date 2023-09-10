@@ -1,6 +1,6 @@
 const notes = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
-const { readAndAppend, readFromFile } = require('../helpers/fsUtils');
+const { readAndAppend, readFromFile, readAndDelete } = require('../helpers/fsUtils');
 
 //get data from db.json
 notes.get('/', (req, res) =>
@@ -31,6 +31,11 @@ notes.post('/', (req, res) => {
     }
 });
 
+notes.delete('/:id', (req, res) => {
+    const noteId = req.params.id;
+    readAndDelete(noteId, './db/db.json');
+    res.json(`Note ${noteId} has been deleted`)
+});
 
 
 
