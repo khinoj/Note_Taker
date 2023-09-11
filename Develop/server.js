@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api', api);
 
+//makes browser able to see public folder structure
 app.use(express.static('public'));
 
 app.get('/', (req,res) =>

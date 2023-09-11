@@ -32,11 +32,10 @@ notes.post('/', (req, res) => {
 });
 
 notes.delete('/:id', (req, res) => {
+    //  :id make req.params.id  (id) possible
     const noteId = req.params.id;
     readAndDelete(noteId, './db/db.json');
     res.json(`Note ${noteId} has been deleted`)
 });
-
-
 
 module.exports = notes;

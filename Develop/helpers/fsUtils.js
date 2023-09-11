@@ -32,12 +32,15 @@ const readAndAppend = (content, file) => {
 };
 
 const readAndDelete = (id, file) => {
+  //(err, data) cb function err is broken or retrieve data
   fs.readFile(file, 'utf8', (err, data) => {
     if (err) {
       console.log(err);
     } else {
       let note = JSON.parse(data);
-      note = note.filter((note) => note.id !== id);
+      //(obj) makes index i but not for loop. Foreach
+      note = note.filter((obj) => obj.id !== id);
+      // (file, note) note is new array being printed to file
       writeToFile(file, note);
     }
   });
